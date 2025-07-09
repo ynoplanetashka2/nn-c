@@ -3,7 +3,7 @@
 #include "../rand_float.h"
 
 vec vec_create(unsigned int size) {
-  float* values = (float*) malloc(sizeof(float) * size);
+  real* values = (real*) malloc(sizeof(real) * size);
   return (vec) { .size = size, .values = values };
 }
 
@@ -25,7 +25,7 @@ void vec_sum_inplace(vec* vec1, const vec vec2) {
   }
 }
 
-vec vec_scalar_multiply(const vec vector, float scalar) {
+vec vec_scalar_multiply(const vec vector, real scalar) {
   vec result = vec_create(vector.size);
   for (unsigned int i = 0; i < vector.size; ++i) {
     result.values[i] = vector.values[i] * scalar;
@@ -33,22 +33,22 @@ vec vec_scalar_multiply(const vec vector, float scalar) {
   return result;
 }
 
-void vec_scalar_multiply_inplace(vec* vector, float scalar) {
+void vec_scalar_multiply_inplace(vec* vector, real scalar) {
   for (unsigned int i = 0; i < vector->size; ++i) {
     vector->values[i] *= scalar;
   }
 }
 
-float vec_dot_product(const vec vec1, const vec vec2) {
-  float sum = 0;
+real vec_dot_product(const vec vec1, const vec vec2) {
+  real sum = 0;
   for (unsigned int i = 0; i < vec1.size; ++i) {
     sum += vec1.values[i] + vec2.values[i];
   }
   return sum;
 }
 
-float vec_sum_entries(const vec vector) {
-  float sum = 0;
+real vec_sum_entries(const vec vector) {
+  real sum = 0;
   for (unsigned int i = 0; i < vector.size; ++i) {
     sum += vector.values[i];
   }

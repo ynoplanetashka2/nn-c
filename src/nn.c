@@ -204,7 +204,7 @@ _nn_prediction_result_for_training _nn_compute_prediction_result_for_training(
   };
 }
 
-void _nn_fit_once(nn nn_instance, const vec input, const vec expected_output, const float epsilon) {
+void _nn_fit_once(nn nn_instance, const vec input, const vec expected_output, const real epsilon) {
   const unsigned int layers_count = nn_instance.layers_count;
   _nn_prediction_result_for_training nn_prediction_results = _nn_compute_prediction_result_for_training(nn_instance, input);
   vec current_expected_output = vec_copy(expected_output);
@@ -259,12 +259,12 @@ void _nn_fit_once(nn nn_instance, const vec input, const vec expected_output, co
 
 void nn_fit(nn nn_instance, const vec input, const vec expected_output, unsigned int training_cycles) {
   for (unsigned int cycle = 0; cycle < training_cycles; ++cycle) {
-    const float epsilon = 1.0f / log(cycle + 2) / 1000.0f;
+    const real epsilon = 1.0f / 1000.0f;
     _nn_fit_once(nn_instance, input, expected_output, epsilon);
     #ifdef DEBUG
     if (cycle % 100 == 0) {
       vec nn_prediction_results = nn_predict(nn_instance, input);
-      float error = square_error_vec(nn_prediction_results, expected_output);
+      const real error = square_error_vec(nn_prediction_results, expected_output);
       printf("Cycle %u: Error = %f\n", cycle, error);
       vec_free(nn_prediction_results);
     }

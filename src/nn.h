@@ -7,7 +7,7 @@
 
 typedef struct {
   /**
-   * layer count excluding input and output ones
+   * layers count excluding input one. must be greater than 0
    */
   unsigned int layers_count;
   unsigned int input_size;

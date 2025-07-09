@@ -3,9 +3,9 @@
 #include "../rand_float.h"
 
 matrix matrix_create(unsigned int height, unsigned int width) {
-  float** rows = (float**) malloc(sizeof(float*) * height);
+  real** rows = (real**) malloc(sizeof(real*) * height);
   for (unsigned int i = 0; i < height; ++i) {
-    rows[i] = (float*) malloc(sizeof(float) * width);
+    rows[i] = (real*) malloc(sizeof(real) * width);
   }
   return (matrix) {
     .height = height,
@@ -21,7 +21,7 @@ void matrix_free(matrix mat) {
 vec matrix_apply(const matrix mat, const vec arg) {
   vec result = vec_create(mat.height);
   for (unsigned int i = 0; i < mat.height; ++i) {
-    float sum = 0;
+    real sum = 0;
     for (unsigned int j = 0; j < mat.width; ++j) {
       sum += mat.values[i][j] * arg.values[j];
     }
@@ -41,7 +41,7 @@ matrix matrix_multiply(const matrix mat1, const matrix mat2) {
   matrix result = matrix_create(mat1.height, mat2.width);
   for (unsigned int i = 0; i < mat1.height; ++i) {
     for (unsigned int j = 0; j < mat2. width; ++j) {
-      float sum = 0;
+      real sum = 0;
       for (unsigned int k = 0; k < mat1.width; ++k) {
         sum += mat1.values[i][k] * mat2.values[k][j];
       }
@@ -147,7 +147,7 @@ void matrix_subtract_inplace(matrix* mat1, const matrix mat2) {
   }
 }
 
-matrix matrix_scalar_multiply(const matrix mat, const float scalar) {
+matrix matrix_scalar_multiply(const matrix mat, const real scalar) {
   matrix result = matrix_create(mat.height, mat.width);
   for (unsigned int i = 0; i < mat.height; ++i) {
     for (unsigned int j = 0; j < mat.width; ++j) {
@@ -157,7 +157,7 @@ matrix matrix_scalar_multiply(const matrix mat, const float scalar) {
   return result;
 }
 
-void matrix_scalar_multiply_inplace(matrix* mat, const float scalar) {
+void matrix_scalar_multiply_inplace(matrix* mat, const real scalar) {
   for (unsigned int i = 0; i < mat->height; ++i) {
     for (unsigned int j = 0; j < mat->width; ++j) {
       mat->values[i][j] *= scalar;
