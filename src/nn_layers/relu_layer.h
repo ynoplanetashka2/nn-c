@@ -3,6 +3,6 @@
 
 #include "nn_layer.h"
 
-nn_layer createReluLayer(unsigned int size);
+nn_layer create_relu_layer(unsigned int size);
 
 #endif
