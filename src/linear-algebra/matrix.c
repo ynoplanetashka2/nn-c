@@ -1,6 +1,6 @@
 #include "matrix.h"
 #include <stdlib.h>
-#include "../rand_float.h"
+#include "../rand/rand_float.h"
 
 matrix matrix_create(unsigned int height, unsigned int width) {
   real** rows = (real**) malloc(sizeof(real*) * height);

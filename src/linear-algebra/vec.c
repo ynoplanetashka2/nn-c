@@ -1,6 +1,6 @@
 #include "vec.h"
 #include <stdlib.h>
-#include "../rand_float.h"
+#include "../rand/rand_float.h"
 
 vec vec_create(unsigned int size) {
   real* values = (real*) malloc(sizeof(real) * size);
