@@ -3,7 +3,7 @@
 
 #include "../linear-algebra/vec.h"
 #include "../linear-algebra/matrix.h"
-#include "../nn.h"
+#include "../nn/nn.h"
 
 void print_vec(const vec vector);
 

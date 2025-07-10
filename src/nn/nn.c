@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <math.h>
 #include "nn.h"
-#include "square_error/square_error.h"
-#include "linear-algebra/real.h"
+#include "../square_error/square_error.h"
+#include "../linear-algebra/real.h"
 
 nn nn_create(nn_layer* layers, unsigned int layers_count, unsigned int input_size, unsigned int output_size) {
   matrix* weights = (matrix*) malloc(sizeof(matrix) * layers_count);

@@ -1,9 +1,9 @@
 #ifndef NN_H
 #define NN_H
 
-#include "linear-algebra/vec.h"
-#include "linear-algebra/matrix.h"
-#include "nn_layers/nn_layer.h"
+#include "../linear-algebra/vec.h"
+#include "../linear-algebra/matrix.h"
+#include "../nn_layers/nn_layer.h"
 
 typedef struct {
   /**
