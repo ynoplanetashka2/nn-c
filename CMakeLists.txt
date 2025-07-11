@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(nn)
+enable_language(C)
 
 # Set C standard
 set(CMAKE_C_STANDARD 99)
@@ -28,14 +29,16 @@ file(GLOB_RECURSE C_SOURCES CONFIGURE_DEPENDS
 )
 
 # Add option to enable CUDA
-option(USE_CUDA "Enable CUDA support" ON)
+option(USE_CUDA "Enable CUDA support")
 
 # If USE_CUDA is ON, check for CUDA
 if(USE_CUDA)
     find_package(CUDAToolkit QUIET)
     if(CUDAToolkit_FOUND)
         message(STATUS "CUDA found. Building with CUDA support.")
+        set(CMAKE_CUDA_ARCHITECTURES OFF)
         enable_language(CUDA)
+        set(CMAKE_CUDA_SEPARABLE_COMPILATION ON)
         # Recursively add all .cu files in src/
         file(GLOB_RECURSE CUDA_SOURCES CONFIGURE_DEPENDS
             "${CMAKE_SOURCE_DIR}/src/*.cu"
