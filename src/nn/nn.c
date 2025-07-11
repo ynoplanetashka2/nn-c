@@ -4,6 +4,7 @@
 #include "nn.h"
 #include "../square_error/square_error.h"
 #include "../linear-algebra/real.h"
+#include "../print/print.h"
 
 nn nn_create(nn_layer* layers, unsigned int layers_count, unsigned int input_size, unsigned int output_size) {
   matrix* weights = (matrix*) malloc(sizeof(matrix) * layers_count);
@@ -34,7 +35,7 @@ nn nn_create(nn_layer* layers, unsigned int layers_count, unsigned int input_siz
 
 void nn_free(nn nn_instance) {
   const unsigned int layers_count = nn_instance.layers_count;
-  for (unsigned int i = 0; i < layers_count + 1; ++i) {
+  for (unsigned int i = 0; i < layers_count; ++i) {
     vec_free(nn_instance.bias[i]);
     matrix_free(nn_instance.weights[i]);
   }
