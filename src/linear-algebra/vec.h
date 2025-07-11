@@ -1,6 +1,10 @@
 #ifndef VEC_H
 #define VEC_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "real.h"
 
 typedef struct {
@@ -35,5 +39,9 @@ void vec_assign(vec* target, vec source);
 vec vec_subtract(const vec vec1, const vec vec2);
 
 void vec_subtract_inplace(vec* vec1, const vec vec2);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

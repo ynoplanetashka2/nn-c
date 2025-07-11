@@ -4,6 +4,10 @@
 #include "vec.h"
 #include "real.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct {
   unsigned int width;
   unsigned int height;
@@ -43,5 +47,9 @@ void matrix_subtract_inplace(matrix* mat1, const matrix mat2);
 matrix matrix_scalar_multiply(const matrix mat, const real scalar);
 
 void matrix_scalar_multiply_inplace(matrix* mat, const real scalar);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
