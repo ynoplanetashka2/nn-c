@@ -9,7 +9,7 @@ __device__ void cuda_matrix_multiply(
   const unsigned int b_height, const unsigned int b_width
 );
 
-__device__ void cuda_matrix_apply(
+__global__ void cuda_matrix_apply(
   const real* matrix, const real* vector, real* output,
   const unsigned int height, const unsigned int width
 );

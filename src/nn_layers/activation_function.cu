@@ -41,7 +41,7 @@ __device__ void _activation_sigmoid(
   }
 }
 
-__device__ void call_activation_function(
+__global__ void call_activation_function(
   const real* argument,
   const unsigned int argument_size,
   real* output,

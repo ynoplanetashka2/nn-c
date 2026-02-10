@@ -2,7 +2,7 @@
 #include "vec.h"
 #include <cuda_runtime.h>
 
-__device__ void cuda_vec_add(const real* a, const real* b, real* c, unsigned int n) {
+__global__ void cuda_vec_add(const real* a, const real* b, real* c, unsigned int n) {
   unsigned int idx = blockIdx.x * blockDim.x + threadIdx.x;
   if (idx < n) {
     c[idx] = a[idx] + b[idx];

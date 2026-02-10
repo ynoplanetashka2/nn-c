@@ -22,7 +22,7 @@ unsigned int _max_ui_ui_ui(unsigned int a, unsigned int b) {
   return (a > b) ? a : b;
 }
 
-__global__ void _cuda_nn_predict_step(
+void _cuda_nn_predict_step(
   const real* weights,
   const real* bias,
   const cuda_nn_layer layer,
@@ -30,16 +30,14 @@ __global__ void _cuda_nn_predict_step(
   const unsigned int input_size,
   real* output
 ) {
-  cuda_matrix_apply(
+  cuda_matrix_apply<<<1, 32>>>(
     weights, input, output, layer.input_size, input_size
   );
-  __syncthreads();
-  cuda_vec_add(
+  cuda_vec_add<<<1, 32>>>(
     output, bias, output, layer.input_size
   );
-  __syncthreads();
   // !!!WARN MAY BREAK IN THE FUTURE
-  call_activation_function(output, layer.input_size, output, layer.output_size, layer.activation_function);
+  call_activation_function<<<1, 32>>>(output, layer.input_size, output, layer.output_size, layer.activation_function);
 }
 
 extern "C"
@@ -73,7 +71,7 @@ vec cuda_nn_predict(const cuda_nn nn_instance, const vec input) {
   for (unsigned int i = 0; i < nn_instance.layers_count; ++i) {
     const cuda_nn_layer layer = nn_instance.layers[i];
     // TODO: Compute block_size and grid_size from input's size
-    _cuda_nn_predict_step<<<1, 32>>>(
+    _cuda_nn_predict_step(
       weights[i], bias[i], layer, current_signal, current_signal_size, next_signal
     );
     cudaDeviceSynchronize();
